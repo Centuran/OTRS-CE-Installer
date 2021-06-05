@@ -1,0 +1,61 @@
+version: '3.7'
+
+x-volumes: &volumes
+  - .:/otrs-ce-installer
+
+x-centos-volumes: &centos-volumes
+  - .:/otrs-ce-installer
+  - /sys/fs/cgroup:/sys/fs/cgroup:ro
+
+services:
+  # Alpine Linux 3
+  test-alpine-3:
+    image: alpine:3
+    tty: true
+    volumes:
+      *volumes
+
+  # CentOS 8
+  test-centos-8: &test-centos-8
+    build:
+      context: &centos-8-context ./tests/centos-8
+      target: base
+    privileged: true
+    tty: true
+    volumes:
+      *centos-volumes
+  # CentOS 8 with Perl installed
+  test-centos-8-stage-1:
+    <<: *test-centos-8
+    build:
+      context: *centos-8-context
+      target: stage-1
+      cache_from: [ test-centos-8:latest ]
+  # CentOS 8 with Perl and Apache installed
+  test-centos-8-stage-2:
+    <<: *test-centos-8
+    build:
+      context: *centos-8-context
+      target: stage-2
+      cache_from: [ test-centos-8-stage-1:latest ]
+  # CentOS 8 with Perl, Apache and MariaDB installed
+  test-centos-8-stage-3:
+    <<: *test-centos-8
+    build:
+      context: *centos-8-context
+      target: stage-3
+      cache_from: [ test-centos-8-stage-2:latest ]
+  # CentOS 8 with Perl, Apache, MariaDB and required Perl modules installed
+  test-centos-8-stage-4:
+    <<: *test-centos-8
+    build:
+      context: *centos-8-context
+      target: stage-4
+      cache_from: [ test-centos-8-stage-3:latest ]
+
+  # Ubuntu 20.04
+  test-ubuntu-20-04:
+    image: ubuntu:20.04
+    tty: true
+    volumes:
+      *volumes

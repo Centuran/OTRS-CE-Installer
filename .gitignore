@@ -1,0 +1,5 @@
+.gradle
+build
+
+otrs-community-edition-*.tar.*
+otrs-community-edition-*.zip

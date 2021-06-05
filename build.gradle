@@ -1,0 +1,13 @@
+plugins {
+    id 'com.avast.gradle.docker-compose' version '0.14.0'
+}
+
+project.ext.dockerComposeProjectName = 'otrs-ce-installer'
+
+dockerCompose {
+    projectName = dockerComposeProjectName
+    waitForTcpPorts = false
+    stopContainers = false
+    forceRecreate = project.hasProperty('forceRecreate')
+    startedServices = []
+}
