@@ -19,5 +19,25 @@ get_apache_version() {
 }
 
 install_apache() {
-    # TODO
+    apt-get update > /dev/null
+    ln -fs /usr/share/zoneinfo/Europe/Warsaw /etc/localtime # to skip interactive installation
+    apt-get install -y apache2  2>&1 | frame_output
+
+    return "${PIPESTATUS[0]}"
+}
+
+#
+# MariaDB-related functions
+#
+
+is_mariadb_installed() {
+    if apt-cache show mariadb-server &> /dev/null; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+get_mariadb_version() {
+    echo $(apt-cache show mariadb-server | grep '^Version' | sed 's/^.*\?:\s\+//')
 }
