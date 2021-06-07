@@ -46,7 +46,7 @@ trap restore_terminal EXIT
 cat "${SCRIPT_DIR}/start.utf8ans"
 
 echo
-print_centered "•   •   •" 80
+print_centered '•   •   •' 80
 echo
 echo
 
@@ -202,3 +202,26 @@ echo
 print_step 13 'Set superuser password'
 
 source "${SCRIPT_DIR}/13-superuser-password.sh"
+
+echo
+print_centered '•   •   •' 80
+echo
+echo
+
+print_centered "${COLOR_SUCCESS_ACCENTED}Installation completed!${COLOR_NONE}" \
+    80
+echo
+echo
+
+OTRS_CE_URL="http://$(hostname -i)/otrs/index.pl"
+
+print_centered "You can now log in to the installed system at:" 80
+echo
+print_centered "${COLOR_LINK}${OTRS_CE_URL}${COLOR_NONE}" 80
+echo
+echo
+
+print_centered "Press any key to exit." 80
+echo
+
+exit_on_any_key

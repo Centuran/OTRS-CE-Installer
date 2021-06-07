@@ -35,6 +35,7 @@ for MODULE in deflate filter headers version; do
         exit 1
     fi
 done
+echo
 
 echo -n 'Adding web application configuration... '
 

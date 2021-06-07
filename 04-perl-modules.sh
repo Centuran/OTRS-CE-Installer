@@ -1,9 +1,9 @@
 echo 'Checking for missing Perl modules...'
-echo
 
 while perl "${INSTALL_DIR}/bin/otrs.CheckModules.pl" 2> /dev/null \
     | grep -v '[Oo]ptional' | grep 'Not installed' &> /dev/null;
 do
+    echo
     perl "${INSTALL_DIR}/bin/otrs.CheckModules.pl" 2> /dev/null \
         | grep 'Not installed' | grep -v '[Oo]ptional' \
         | sed 's/^\s*.\s*\([^.]\+\).*$/\1/;s/^\[\S*\s*.\s*//g' \

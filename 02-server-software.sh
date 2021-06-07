@@ -60,6 +60,7 @@ check() {
 
 act() {
     if [ "${HTTP_SERVER_NOT_INSTALLED}" = 1 ]; then
+        echo
         print_notice "No HTTP server has been found on this system.
             The installer can attempt to fix this and install the Apache HTTP
             server using standard system software repositories."
@@ -87,6 +88,7 @@ act() {
     fi
 
     if [ "${DATABASE_SERVER_NOT_INSTALLED}" = 1 ]; then
+        echo
         print_notice "No database server has been found on this system.
             The installer can attempt to fix this and install the MariaDB server
             using standard system software repositories."
@@ -115,8 +117,6 @@ act() {
 }
 
 while ! check; do
-    echo
-
     act
 
     echo
