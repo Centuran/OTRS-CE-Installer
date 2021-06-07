@@ -86,12 +86,15 @@ install_mariadb() {
     local STATUS=${PIPESTATUS[0]}
 
     if [ ${STATUS} = 0 ]; then
+        # Set variable so that the user doesn't need to enter this password
+        # for database creation step
+        MARIADB_ROOT_PASSWORD="${ROOT_PASSWORD}"
         echo
         print_notice "The installer has set the MariaDB
             ${COLOR_NOTICE_BOLD}root${COLOR_NOTICE} user password to
             \"${COLOR_NOTICE_BOLD}${ROOT_PASSWORD}${COLOR_NOTICE}\" (without the
-            quotes). {FIXME} Please keep this password safe or change it using
-            ..."
+            quotes). Please keep this password safe or change it."
+        # TODO: Tell the user how to change the password or what docs to read
         echo
 
         print_centered "Press $(style_key Enter) to proceed." 80
