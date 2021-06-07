@@ -12,9 +12,11 @@ print_check_result() {
     success=$2
 
     if [ "$success" -eq 1 ]; then
-        echo -e "${COLOR_GREEN_BOLD}${text}${COLOR_NONE} ${RESULT_SUCCESS}"
+        echo -e "${COLOR_SUCCESS_ACCENTED}${text}${COLOR_NONE}" \
+            "${RESULT_SUCCESS}"
     else
-        echo -e "${COLOR_RED_BOLD}${text}${COLOR_NONE} ${RESULT_FAILURE}"
+        echo -e "${COLOR_FAILURE_ACCENTED}${text}${COLOR_NONE}" \
+            "${RESULT_FAILURE}"
     fi
 }
 
@@ -22,7 +24,7 @@ print_notice() {
     local TEXT=$1
     local NO_COLOR=$2
 
-    echo -ne "${COLOR_INVERTED_BOLD}${COLOR_NOTICE_BG} ! ${COLOR_NONE} "
+    echo -ne "${COLOR_NOTICE_BG}${COLOR_INVERTED_BOLD} ! ${COLOR_NONE} "
 
     TEXT=$(echo "${TEXT}" | sed 's/^\s*//')
 
