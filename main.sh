@@ -179,9 +179,21 @@ echo
 # Step 11: Start daemon process
 #
 
+print_step 11 'Start daemon process'
+
+source "${SCRIPT_DIR}/11-daemon.sh"
+
+echo
+
 #
 # Step 12: Set up cron jobs
 #
+
+print_step 12 'Set up cron jobs'
+
+source "${SCRIPT_DIR}/12-cron-jobs.sh"
+
+echo
 
 #
 # Step 13: Set superuser password
