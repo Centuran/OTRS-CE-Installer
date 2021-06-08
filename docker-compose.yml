@@ -69,3 +69,10 @@ services:
       context: *ubuntu-20-context
       target: stage-1
       cache_from: [ test-ubuntu-20:latest ]
+  # Ubuntu 20 with Apache and MariaDB and Perl modules installed
+  test-ubuntu-20-stage-2:
+    <<: *test-ubuntu-20
+    build:
+      context: *ubuntu-20-context
+      target: stage-2
+      cache_from: [ test-ubuntu-20-stage-1:latest ]
