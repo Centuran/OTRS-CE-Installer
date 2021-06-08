@@ -3,6 +3,7 @@
 #
 
 is_apache_installed() {
+    apt-get update > /dev/null # TODO: should be executed once at the start of installation
     if apache2 -v 2> /dev/null | grep 'Apache' &> /dev/null; then
         return 0
     else
@@ -19,7 +20,6 @@ get_apache_version() {
 }
 
 install_apache() {
-    apt-get update > /dev/null # TODO: should be executed once at the start of installation
     ln -fs /usr/share/zoneinfo/Europe/Warsaw /etc/localtime # to skip interactive installation
     apt-get install -y apache2  2>&1 | frame_output
 
@@ -82,16 +82,25 @@ install_mariadb() {
 
 install_perl_module() {
     local MODULE=$1
-    perl_module_line=`perl "${INSTALL_DIR}/bin/otrs.CheckModules.pl" | grep ${MODULE}`
-    IFS="'"
-    read -a perl_parts <<< "$perl_module_line"
-    aptget_script=${perl_parts[1]}
+    PKG=`echo $MODULE | sed 's/::/-/g;s/[A-Z]/\L&/g'`
+    PKG="lib$PKG-perl"
 
-
-    if apt-get install -y ${aptget_script:19} &> /dev/null; then
+    if apt-get install -y ${PKG} &> /dev/null; then
         return 0
     else
-        return 1
+         if ! cpanm --version &> /dev/null < /dev/null; then
+            if ! apt-get install -y 'cpanminus' &> /dev/null; then
+                # TODO: Handle error
+                return 1
+            fi
+            apt-get install -y "build-essential" &> /dev/null
+
+        fi
+        if cpanm "${MODULE}" &> /dev/null < /dev/null; then
+            return 0
+        else
+            return 1
+        fi
     fi
 
 }
