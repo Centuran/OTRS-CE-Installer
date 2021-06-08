@@ -31,7 +31,7 @@ install_apache() {
 #
 
 is_mariadb_installed() {
-    if apt-cache show mariadb-server &> /dev/null; then
+    if dpkg -s mariadb-server &> /dev/null; then
         return 0
     else
         return 1
@@ -39,7 +39,7 @@ is_mariadb_installed() {
 }
 
 get_mariadb_version() {
-    echo $(apt-cache show mariadb-server | grep '^Version' | sed 's/^.*\?:\s\+//')
+    echo $(dpkg -s mariadb-server | grep '^Version' | sed 's/^.*\?:\s\+//')
 }
 
 install_mariadb() {
@@ -47,8 +47,8 @@ install_mariadb() {
 
     (
         apt-get install -y mariadb-server 2>&1
-        service mysql start 2>&1
-        service mysql enable 2>&1
+        /etc/init.d/mysql start 2>&1
+        /etc/init.d/mysql enable  2>&1
         echo -e "\n\n${ROOT_PASSWORD}\n${ROOT_PASSWORD}\n\n\n\nn\n\n" \
             | /usr/bin/mysql_secure_installation 2>&1
     ) | frame_output
