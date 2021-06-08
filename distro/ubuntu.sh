@@ -25,6 +25,22 @@ install_apache() {
     return "${PIPESTATUS[0]}"
 }
 
+is_mod_perl_installed() {
+    if dpkg -s libapache2-mod-perl2 &> /dev/null; then
+            return 0
+        else
+            return 1
+        fi
+}
+
+install_mod_perl() {
+    (
+        apt-get install -y libapache2-mod-perl2 2>&1
+    )| less -r | frame_output
+
+    return "${PIPESTATUS[0]}"
+}
+
 #
 # MariaDB-related functions
 #
