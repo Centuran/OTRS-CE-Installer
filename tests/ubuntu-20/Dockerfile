@@ -1,6 +1,7 @@
 FROM ubuntu:20.04 AS base
 
 RUN apt-get update
+RUN apt-get install -y less
 RUN ln -fs /usr/share/zoneinfo/Europe/Warsaw /etc/localtime
 RUN apt-get install -y systemd
 

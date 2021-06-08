@@ -3,7 +3,6 @@
 #
 
 is_apache_installed() {
-    apt-get update > /dev/null # TODO: should be executed once at the start of installation
     if apache2 -v 2> /dev/null | grep 'Apache' &> /dev/null; then
         return 0
     else
@@ -21,7 +20,7 @@ get_apache_version() {
 
 install_apache() {
     ln -fs /usr/share/zoneinfo/Europe/Warsaw /etc/localtime # to skip interactive installation
-    apt-get install -y apache2  2>&1 | frame_output
+    apt-get install -y apache2  2>&1 | less -r | frame_output
 
     return "${PIPESTATUS[0]}"
 }
@@ -51,7 +50,7 @@ install_mariadb() {
         /etc/init.d/mysql enable  2>&1
         echo -e "\n\n${ROOT_PASSWORD}\n${ROOT_PASSWORD}\n\n\n\nn\n\n" \
             | /usr/bin/mysql_secure_installation 2>&1
-    ) | frame_output
+    )| less -r | frame_output
 
     local STATUS=${PIPESTATUS[0]}
 
