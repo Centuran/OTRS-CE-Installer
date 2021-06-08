@@ -75,3 +75,23 @@ install_mariadb() {
 
     return "${STATUS}"
 }
+
+#
+# Other functions
+#
+
+install_perl_module() {
+    local MODULE=$1
+    perl_module_line=`perl "${INSTALL_DIR}/bin/otrs.CheckModules.pl" | grep ${MODULE}`
+    IFS="'"
+    read -a perl_parts <<< "$perl_module_line"
+    aptget_script=${perl_parts[1]}
+
+
+    if apt-get install -y ${aptget_script:19} &> /dev/null; then
+        return 0
+    else
+        return 1
+    fi
+
+}
