@@ -11,22 +11,22 @@ $ ./run-in-container test-centos-8-stage-3
 
 ### CentOS
 
-- **test-centos-8**
+- **test-centos-8**  
   Base CentOS 8 system built from the `centos:8.3.2011` image with systemd enabled
-- **test-centos-8-stage-1**
+- **test-centos-8-stage-1**  
   CentOS 8 with Perl installed
-- **test-centos-8-stage-2**
+- **test-centos-8-stage-2**  
   CentOS 8 with Perl and Apache installed
-- **test-centos-8-stage-3**
+- **test-centos-8-stage-3**  
   CentOS 8 with Perl, Apache, and MariaDB installed
-- **test-centos-8-stage-4**
+- **test-centos-8-stage-4**  
   CentOS 8 with Perl, Apache, MariaDB, and Perl modules required by OTRS CE installed
 
 ### Ubuntu
 
-- **test-ubuntu-20**
+- **test-ubuntu-20**  
   Base Ubuntu 20 system built from the `ubuntu:20.04` image with Perl installed
-- **test-ubuntu-20-stage-1**
+- **test-ubuntu-20-stage-1**  
   Ubuntu 20 with Perl, Apache and MariaDB installed
 
 ## Shell Variables
