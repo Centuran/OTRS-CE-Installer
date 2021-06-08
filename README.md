@@ -27,8 +27,10 @@ $ ./run-in-container test-centos-8-stage-3
 - **test-ubuntu-20**  
   Base Ubuntu 20 system built from the `ubuntu:20.04` image with Perl installed
 - **test-ubuntu-20-stage-1**  
-  Ubuntu 20 with Perl, Apache and MariaDB installed
+  Ubuntu 20 with Perl and Apache installed
 - **test-ubuntu-20-stage-2**  
+  Ubuntu 20 with Perl, Apache and MariaDB installed
+- **test-ubuntu-20-stage-3**  
   Ubuntu 20 with Perl, Apache, MariaDB and Perl modules installed
 
 ## Shell Variables
