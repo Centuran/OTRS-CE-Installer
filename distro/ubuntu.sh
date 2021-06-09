@@ -41,6 +41,14 @@ install_mod_perl() {
     return "${PIPESTATUS[0]}"
 }
 
+enable_apache_mod() {
+    local MODULE=$1
+
+    a2enmod ${MODULE} &> /dev/null
+
+    return "${PIPESTATUS[0]}"
+}
+
 #
 # MariaDB-related functions
 #

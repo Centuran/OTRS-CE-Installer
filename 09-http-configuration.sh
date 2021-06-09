@@ -4,7 +4,7 @@ if is_mod_perl_installed; then
     print_check_result 'installed' 1
 else
     print_check_result 'not installed' 0
-    
+
     echo
     echo 'Installing mod_perl...'
     echo
@@ -31,8 +31,19 @@ for MODULE in deflate filter headers version; do
         print_check_result 'enabled' 1
     else
         print_check_result 'not found' 0
-        # TODO: Handle error
-        exit 1
+
+        echo
+        echo "Enabling module ${MODULE}..."
+        echo
+        if enable_apache_mod ${MODULE}; then
+            print_check_result "${MODULE} enabled." 1
+            echo
+        else
+            print_check_result "${MODULE} enabling failed." 0
+            echo
+            # TODO: Show error
+            exit 1
+        fi
     fi
 done
 echo
