@@ -23,7 +23,6 @@ get_apache_version() {
 }
 
 install_apache() {
-    ln -fs /usr/share/zoneinfo/Europe/Warsaw /etc/localtime # to skip interactive installation
     apt-get install -y apache2  2>&1 | less -r | frame_output
 
     return "${PIPESTATUS[0]}"
