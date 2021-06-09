@@ -32,14 +32,11 @@ for MODULE in deflate filter headers version; do
     else
         print_check_result 'not found' 0
 
-        echo
-        echo "Enabling module ${MODULE}..."
-        echo
+        echo -n "   Enabling module \"${MODULE}\"..."
         if enable_apache_mod ${MODULE}; then
-            print_check_result "${MODULE} enabled." 1
-            echo
+            print_check_result " enabled" 1
         else
-            print_check_result "${MODULE} enabling failed." 0
+            print_check_result " failed" 0
             echo
             # TODO: Show error
             exit 1
