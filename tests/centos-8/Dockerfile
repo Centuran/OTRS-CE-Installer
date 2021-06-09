@@ -42,7 +42,7 @@ FROM stage-2 AS stage-3
 
 RUN yum install -y expect mariadb-server
 
-COPY ../init-mariadb.sh /usr/local/sbin/
+COPY init-mariadb.sh /usr/local/sbin/
 
 # We need to run /usr/bin/mysql_secure_installation, which requires MariaDB
 # to be up (and we can't do "systemctl start" here in the Dockerfile). This ugly

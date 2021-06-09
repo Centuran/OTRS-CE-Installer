@@ -33,7 +33,7 @@ FROM stage-1 AS stage-2
 
 RUN apt-get install -y mariadb-server
 
-COPY ../init-mariadb.sh /usr/local/sbin/
+COPY init-mariadb.sh /usr/local/sbin/
 
 # We need to run /usr/bin/mysql_secure_installation, which requires MariaDB
 # to be up (and we can't do "systemctl start" here in the Dockerfile). This ugly
