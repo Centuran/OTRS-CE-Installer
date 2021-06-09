@@ -10,6 +10,10 @@ is_apache_installed() {
     fi
 }
 
+get_apache_config_dir() {
+    echo '/etc/apache2/sites-enabled'
+}
+
 get_apache_group() {
     echo 'www-data'
 }
