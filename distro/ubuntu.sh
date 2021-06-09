@@ -49,6 +49,14 @@ enable_apache_mod() {
     return "${PIPESTATUS[0]}"
 }
 
+restart_apache() {
+    if systemctl restart apache2.service &> /dev/null; then
+        return 0
+    else
+        return 1
+    fi
+}
+
 #
 # MariaDB-related functions
 #
