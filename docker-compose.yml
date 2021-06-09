@@ -61,7 +61,7 @@ services:
     privileged: true
     tty: true
     volumes:
-      *volumes
+      *centos-volumes
   # Ubuntu 20 with Perl and Apache installed
   test-ubuntu-20-stage-1:
     <<: *test-ubuntu-20
