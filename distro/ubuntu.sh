@@ -23,7 +23,7 @@ get_apache_version() {
 }
 
 install_apache() {
-    apt-get -q install -y apache2 2>&1 | less -r | awk '!/^\(Reading/'| frame_output
+    apt-get install -y apache2  2>&1 | less -r | frame_output
 
     return "${PIPESTATUS[0]}"
 }
@@ -39,7 +39,7 @@ is_mod_perl_installed() {
 install_mod_perl() {
     (
         apt-get install -y libapache2-mod-perl2 2>&1
-    )| less -r | awk '!/^\(Reading/' | frame_output
+    )| less -r | frame_output
 
     return "${PIPESTATUS[0]}"
 }
@@ -85,7 +85,7 @@ install_mariadb() {
         /etc/init.d/mysql enable  2>&1
         echo -e "\n\n${ROOT_PASSWORD}\n${ROOT_PASSWORD}\n\n\n\nn\n\n" \
             | /usr/bin/mysql_secure_installation 2>&1
-    )| less -r | awk '!/^\(Reading/' | frame_output
+    )| less -r | frame_output
 
     local STATUS=${PIPESTATUS[0]}
 
