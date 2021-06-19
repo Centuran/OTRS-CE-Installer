@@ -7,7 +7,7 @@ install_perl() {
     local STATUS=1
 
     if [[ "${SYSTEM}" == 'centos/'* ]]; then
-        yum install -y perl 2>&1 | less -r | frame_output
+        yum install -y perl 2>&1 | less -R | frame_output
 
         STATUS=${PIPESTATUS[0]}
     fi

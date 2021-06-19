@@ -31,7 +31,7 @@ get_apache_version() {
 }
 
 install_apache() {
-    yum install -y httpd 2>&1 | less -r | frame_output
+    yum install -y httpd 2>&1 | less -R | frame_output
 
     return "${PIPESTATUS[0]}"
 }
@@ -43,7 +43,7 @@ install_mod_perl() {
         fi
 
         yum install -y mod_perl 2>&1
-    )| less -r | frame_output
+    )| less -R | frame_output
 
     return "${PIPESTATUS[0]}"
 }
@@ -81,7 +81,7 @@ install_mariadb() {
         systemctl enable mariadb.service 2>&1
         echo -e "\n\n${ROOT_PASSWORD}\n${ROOT_PASSWORD}\n\n\n\nn\n\n" \
             | /usr/bin/mysql_secure_installation 2>&1
-    )| less -r | frame_output
+    )| less -R | frame_output
 
     local STATUS=${PIPESTATUS[0]}
 
@@ -140,7 +140,7 @@ install_perl_module() {
 }
 
 install_bzip2() {
-    yum install -y bzip2 2>&1 | less -r | frame_output
+    yum install -y bzip2 2>&1 | less -R | frame_output
     
     return "${PIPESTATUS[0]}"
 }
