@@ -17,12 +17,17 @@ check() {
 
     echo -n ' • Checking OS version:          '
 
+    # Read the specified value from the /etc/os-release file
+    read_os_release() {
+        local NAME=$1
+        printf "$(cat /etc/os-release | grep "^${NAME}=" \
+            | sed 's/^.*=//;s/"//g')"
+    }
+
     if [ -f /etc/os-release ]; then
-        SYSTEM_TYPE=$(cat /etc/os-release | grep '^ID=' | sed 's/^.*=//;s/"//g')
-        SYSTEM_VERSION=$(cat /etc/os-release | grep '^VERSION_ID=' \
-            | sed 's/^.*=//;s/"//g')
-        SYSTEM_NAME=$(cat /etc/os-release | grep '^PRETTY_NAME=' \
-            | sed 's/^.*=//;s/"//g')
+        SYSTEM_TYPE=$(read_os_release ID)
+        SYSTEM_VERSION=$(read_os_release VERSION_ID)
+        SYSTEM_NAME=$(read_os_release PRETTY_NAME)
         SYSTEM="${SYSTEM_TYPE}/${SYSTEM_VERSION}"
         export SYSTEM
 
@@ -38,6 +43,9 @@ check() {
         STATUS=${STATUS_FAILURE}
         print_check_result "/etc/os-release not found" 0
     fi
+
+    # The helper function is no longer needed
+    unset -f read_os_release
 
     # Check if SELinux is disabled or not present
 
