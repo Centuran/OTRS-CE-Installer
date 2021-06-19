@@ -21,7 +21,7 @@ COPY entrypoint.sh /
 ENTRYPOINT [ "/entrypoint.sh" ]
 
 #
-# Stage 1: Ubuntu 20 with Perl and Apache installed
+# Stage 1: Ubuntu 20.04 with Apache installed
 #
 
 FROM base AS stage-1
@@ -30,7 +30,7 @@ RUN apt-get install -y apache2; \
     systemctl enable apache2
 
 #
-# Stage 2: Ubuntu 20 with Perl, Apache and MariaDB installed
+# Stage 2: Ubuntu 20.04 with Apache and MariaDB installed
 #
 
 FROM stage-1 AS stage-2
@@ -44,7 +44,7 @@ RUN systemctl enable mariadb.service; \
     '/usr/local/sbin/init-mariadb.sh; fi'
 
 #
-# Stage 3: Ubuntu 20 with Perl, Apache, MariaDB and Perl modules installed
+# Stage 3: Ubuntu 20.04 with Apache, MariaDB and Perl modules installed
 #
 
 FROM stage-2 AS stage-3

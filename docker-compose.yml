@@ -51,33 +51,33 @@ services:
       target: stage-4
       cache_from: [ test-centos-8-stage-3:latest ]
 
-  # Ubuntu 20
-  test-ubuntu-20: &test-ubuntu-20
+  # Ubuntu 20.04
+  test-ubuntu-20-04: &test-ubuntu-20-04
     build:
-      context: &ubuntu-20-context ./tests/ubuntu-20
+      context: &ubuntu-20-04-context ./tests/ubuntu-20-04
       target: base
     privileged: true
     tty: true
     volumes:
       *centos-volumes
-  # Ubuntu 20 with Perl and Apache installed
-  test-ubuntu-20-stage-1:
-    <<: *test-ubuntu-20
+  # Ubuntu 20.04 with Perl and Apache installed
+  test-ubuntu-20-04-stage-1:
+    <<: *test-ubuntu-20-04
     build:
-      context: *ubuntu-20-context
+      context: *ubuntu-20-04-context
       target: stage-1
-      cache_from: [ test-ubuntu-20:latest ]
-  # Ubuntu 20 with Perl, Apache and MariaDB installed
-  test-ubuntu-20-stage-2:
-    <<: *test-ubuntu-20
+      cache_from: [ test-ubuntu-20-04:latest ]
+  # Ubuntu 20.04 with Perl, Apache and MariaDB installed
+  test-ubuntu-20-04-stage-2:
+    <<: *test-ubuntu-20-04
     build:
-      context: *ubuntu-20-context
+      context: *ubuntu-20-04-context
       target: stage-2
-      cache_from: [ test-ubuntu-20-stage-1:latest ]
-  # Ubuntu 20 with Perl, Apache, MariaDB and Perl modules installed
-  test-ubuntu-20-stage-3:
-    <<: *test-ubuntu-20
+      cache_from: [ test-ubuntu-20-04-stage-1:latest ]
+  # Ubuntu 20.04 with Perl, Apache, MariaDB and Perl modules installed
+  test-ubuntu-20-04-stage-3:
+    <<: *test-ubuntu-20-04
     build:
-      context: *ubuntu-20-context
+      context: *ubuntu-20-04-context
       target: stage-3
-      cache_from: [ test-ubuntu-20-stage-2:latest ]
+      cache_from: [ test-ubuntu-20-04-stage-2:latest ]
