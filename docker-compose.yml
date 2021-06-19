@@ -12,8 +12,7 @@ services:
   test-alpine-3:
     image: alpine:3
     tty: true
-    volumes:
-      *volumes
+    volumes: *volumes
 
   # CentOS 8
   test-centos-8: &test-centos-8
@@ -22,8 +21,7 @@ services:
       target: base
     privileged: true
     tty: true
-    volumes:
-      *centos-volumes
+    volumes: *centos-volumes
   # CentOS 8 with Perl installed
   test-centos-8-stage-1:
     <<: *test-centos-8
@@ -57,5 +55,4 @@ services:
   test-ubuntu-20-04:
     image: ubuntu:20.04
     tty: true
-    volumes:
-      *volumes
+    volumes: *volumes
