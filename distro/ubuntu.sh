@@ -23,7 +23,12 @@ get_apache_version() {
 }
 
 install_apache() {
-    apt-get install -y apache2  2>&1 | less -r | frame_output
+    # The output of the installation command contains carriage returns ("\r")
+    # which break the frame. The sed command below replaces "\r"'s ("\x0d")
+    # that aren't followed by line feeds ("\x0a") with "\n".
+    # TODO: Should probably make the "less -R | sed ..." combo an utility function
+    apt-get install -y apache2 2>&1 | less -R | \
+        sed 's/\x0d[^\x0a]\(.\)/\n\1/g' | frame_output
 
     return "${PIPESTATUS[0]}"
 }
