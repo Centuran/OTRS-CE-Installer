@@ -143,3 +143,17 @@ install_perl_module() {
     fi
 
 }
+
+#
+# Distribution-specific functions
+#
+
+install_apt_package() {
+    local NAME=$1
+
+    (
+        apt-get install -y "${NAME}" 2>&1
+    )| less -R | frame_output
+
+    return "${PIPESTATUS[0]}"
+}

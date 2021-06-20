@@ -2,6 +2,23 @@
 
 ROOT_PASSWORD='root'
 
+if ! which expect; then
+    echo "Installing expect..."
+    echo
+
+    if install_apt_package expect; then
+        echo
+        print_check_result 'Installation of expect was successful.' 1
+        echo
+    else
+        echo
+        print_check_result 'Installation of expect failed.' 0
+        echo
+        # TODO: Explain to user, retry?
+        exit 1
+    fi
+fi
+
 while ! systemctl status mariadb; do
     sleep 1
 done
