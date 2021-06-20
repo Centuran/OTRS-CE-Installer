@@ -35,10 +35,10 @@ install_apache() {
 
 is_mod_perl_installed() {
     if dpkg -s libapache2-mod-perl2 &> /dev/null; then
-            return 0
-        else
-            return 1
-        fi
+        return 0
+    else
+        return 1
+    fi
 }
 
 install_mod_perl() {
