@@ -7,6 +7,10 @@ x-centos-volumes: &centos-volumes
   - .:/otrs-ce-installer
   - /sys/fs/cgroup:/sys/fs/cgroup:ro
 
+x-ubuntu-volumes: &ubuntu-volumes
+  - .:/otrs-ce-installer
+  - /sys/fs/cgroup:/sys/fs/cgroup:ro
+
 services:
   # Alpine Linux 3
   test-alpine-3:
@@ -58,8 +62,7 @@ services:
       target: base
     privileged: true
     tty: true
-    volumes:
-      *centos-volumes
+    volumes: *ubuntu-volumes
   # Ubuntu 20.04 with Perl and Apache installed
   test-ubuntu-20-04-stage-1:
     <<: *test-ubuntu-20-04
