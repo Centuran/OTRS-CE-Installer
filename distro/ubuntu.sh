@@ -86,8 +86,7 @@ install_mariadb() {
 
     (
         apt-get install -y mariadb-server 2>&1
-        /etc/init.d/mysql start 2>&1
-        /etc/init.d/mysql enable  2>&1
+        systemctl start mariadb
         echo -e "\n\n${ROOT_PASSWORD}\n${ROOT_PASSWORD}\n\n\n\nn\n\n" \
             | /usr/bin/mysql_secure_installation 2>&1
     )| less -R | sed 's/\x0d[^\x0a]\(.\)/\n\1/g' | frame_output
