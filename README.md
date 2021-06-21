@@ -7,6 +7,32 @@ $ ./run-in-container test-centos-8-stage-3
 ```
 
 
+## Tests
+
+Run tests:
+
+```
+$ cd tests
+$ prove installation.t
+```
+
+Run tests with output:
+
+```
+$ cd tests
+$ SHOW_OUTPUT=1 prove -v installation.t
+```
+
+Note that some color output will probably be incorrect when running tests with
+the above command. To make sure the actual output isn't broken, you can run
+tests with `perl`:
+
+```
+$ cd tests
+$ SHOW_OUTPUT=1 perl installation.t
+```
+
+
 ## Docker Containers
 
 ### CentOS
