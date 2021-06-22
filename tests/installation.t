@@ -134,6 +134,57 @@ subtest 'Installation succeeds on Ubuntu 20.04' => sub {
     $h->finish();
 };
 
+subtest 'Installation succeeds on Ubuntu 21.04' => sub {
+    my ($in, $out);
+
+    my $h = start(
+        [ '../run-in-container.sh', 'test-ubuntu-21-04' ],
+        '<pty<', \$in,
+        '>pty>', \$out,
+    );
+
+    $h->{PTYS}{0}->set_winsize($lines, $columns);
+
+    _pump($h, $out) until $out =~ /Press .*? to start installation/;
+    # Enter to start installation
+    $in = "\n";
+
+    _pump($h, $out) until $out =~ /Press .*? to install Apache/;
+    # Enter to install Apache
+    $in = "\n";
+
+    _pump($h, $out) until $out =~ /Press .*? to install MariaDB/;
+    # Enter to install MariaDB
+    $in = "\n";
+
+    _pump($h, $out) until $out =~ /installer has set the MariaDB/ &&
+        $out =~ / .*?root.*? user password/;
+    # Enter to acknowledge MariaDB password
+    $in = "\n";
+
+    _pump($h, $out) until $out =~ /Enter new password for/;
+    # Superuser password
+    $in = "test\n";
+
+    _pump($h, $out) until $out =~ /Enter new password again/;
+    # Superuser password repeated
+    $in = "test\n";
+
+    _pump($h, $out) until $out =~ /Installation completed/;
+    _pump($h, $out) until $out =~ /(?<url>https?:\/\/\S+\/otrs\/index\.pl)/;
+
+    like($+{url}, qr{^http://.*?/otrs/index.pl$},
+        'Installation returns the application URL');
+
+    test_login($+{url});
+
+    # Enter to exit installation
+    $in = "\n";
+    $h->pump();
+
+    $h->finish();
+};
+
 sub test_login {
     my ($url) = @_;
 
