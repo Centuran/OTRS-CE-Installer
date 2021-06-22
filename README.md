@@ -58,6 +58,15 @@ $ SHOW_OUTPUT=1 perl installation.t
   Ubuntu 20.04 with Apache and MariaDB installed
 - **test-ubuntu-20-04-stage-3**  
   Ubuntu 20.04 with Apache, MariaDB, and Perl modules required by OTRS CE installed
+  
+- **test-ubuntu-21-04**  
+  Base Ubuntu 21.04 system built from the `ubuntu:21.04` image with systemd enabled
+- **test-ubuntu-21-04-stage-1**  
+  Ubuntu 21.04 with Apache installed
+- **test-ubuntu-21-04-stage-2**  
+  Ubuntu 21.04 with Apache and MariaDB installed
+- **test-ubuntu-21-04-stage-3**  
+  Ubuntu 21.04 with Apache, MariaDB, and Perl modules required by OTRS CE installed
 
 
 ## Shell Variables
