@@ -4,7 +4,7 @@ ENV container docker
 
 RUN ln -fs /usr/share/zoneinfo/Europe/Warsaw /etc/localtime; \
     apt-get update; \
-    apt-get install -y systemd systemd-sysv; \
+    apt-get install -y systemd systemd-sysv libdbd-mysql-perl; \
     apt-get install -y less
 
 # Commands below are based on jrei/systemd-ubuntu
