@@ -204,6 +204,16 @@ print_step 13 'Set superuser password'
 source "${SCRIPT_DIR}/13-superuser-password.sh"
 
 echo
+
+#
+# Step 14: Set superuser password
+#
+
+print_step 14 'Rebuild OTRS system configuration'
+
+source "${SCRIPT_DIR}/14-config-rebuild.sh"
+
+echo
 print_centered '•   •   •' 80
 echo
 echo
