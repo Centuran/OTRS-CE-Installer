@@ -200,12 +200,12 @@ source "${SCRIPT_DIR}/12-cron-jobs.sh"
 echo
 
 #
-# Step 13: Set superuser password
+# Step 13: Rebuild system configuration
 #
 
-print_step 13 'Set superuser password'
+print_step 13 'Rebuild system configuration'
 
-source "${SCRIPT_DIR}/13-superuser-password.sh"
+source "${SCRIPT_DIR}/13-config-rebuild.sh"
 
 echo
 
@@ -213,9 +213,9 @@ echo
 # Step 14: Set superuser password
 #
 
-print_step 14 'Rebuild OTRS system configuration'
+print_step 14 'Set superuser password'
 
-source "${SCRIPT_DIR}/14-config-rebuild.sh"
+source "${SCRIPT_DIR}/14-superuser-password.sh"
 
 echo
 print_centered '•   •   •' 80

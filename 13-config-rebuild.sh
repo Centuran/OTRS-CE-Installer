@@ -1,4 +1,4 @@
-echo -n 'Rebuilding config... '
+echo -n 'Rebuilding configuration... '
 
 if runuser -u otrs "${INSTALL_DIR}/bin/otrs.Console.pl" 'Maint::Config::Rebuild' &> /dev/null;
 then
@@ -10,5 +10,5 @@ else
 fi
 
 echo
-print_check_result 'Config rebuilt successfully.' 1
+print_check_result 'System configuration rebuilt successfully.' 1
 echo
