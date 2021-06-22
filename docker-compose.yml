@@ -101,7 +101,7 @@ services:
       target: stage-1
       cache_from: [ test-ubuntu-21-04:latest ]
   # Ubuntu 21.04 with Perl, Apache and MariaDB installed
-  test-ubuntu-20-04-stage-2:
+  test-ubuntu-21-04-stage-2:
     <<: *test-ubuntu-21-04
     build:
       context: *ubuntu-21-04-context
