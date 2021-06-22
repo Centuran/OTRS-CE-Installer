@@ -83,14 +83,18 @@ get_mariadb_version() {
     echo $(dpkg -s mariadb-server | grep '^Version' | sed 's/^.*\?:\s\+//')
 }
 
+do_mariadb_secure_installation() {
+    echo -e "\n\n${ROOT_PASSWORD}\n${ROOT_PASSWORD}\n\n\n\nn\n\n" \
+        | /usr/bin/mysql_secure_installation 2>&1
+}
+
 install_mariadb() {
     local ROOT_PASSWORD=$(generate_password)
 
     (
         apt-get install -y mariadb-server 2>&1
         systemctl start mariadb
-        echo -e "\n\n\n${ROOT_PASSWORD}\n${ROOT_PASSWORD}\n\n\n\nn\n\n" \
-            | /usr/bin/mysql_secure_installation 2>&1
+        do_mariadb_secure_installation
     )| less -R | sed 's/\x0d[^\x0a]\(.\)/\n\1/g' | frame_output
 
     local STATUS=${PIPESTATUS[0]}

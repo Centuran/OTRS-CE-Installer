@@ -79,10 +79,12 @@ source "${SCRIPT_DIR}/01-prerequisites.sh"
 # Load system-specific functions
 if [[ "${SYSTEM}" == 'centos/'* ]]; then
     source "${SCRIPT_DIR}/distro/centos.sh"
-elif [[ "${SYSTEM}" == 'ubuntu/20'* ]]; then
-    source "${SCRIPT_DIR}/distro/ubuntu20.sh"
-elif [[ "${SYSTEM}" == 'ubuntu/21'* ]]; then
-    source "${SCRIPT_DIR}/distro/ubuntu21.sh"
+elif [[ "${SYSTEM}" == 'ubuntu/'* ]]; then
+    source "${SCRIPT_DIR}/distro/ubuntu.sh"
+    
+    if [[ "${SYSTEM}" == 'ubuntu/21.04'* ]]; then
+        source "${SCRIPT_DIR}/distro/ubuntu-21.04.sh"
+    fi
 fi
 
 echo
