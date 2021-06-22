@@ -13,7 +13,7 @@ missing_modules() {
                 if [ "${MODULE}" = 'DBD::mysql' ] && \
                     [ "${DATABASE_SERVER}" = 'MariaDB' ]
                 then
-                    :           # Do nothing (add DBD::mysql to the list)
+                    :           # Have DBD::mysql added to the list
                 else
                     continue    # Continue loop (ignore optional module)
                 fi
