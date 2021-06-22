@@ -24,7 +24,7 @@ RUN rm -f /lib/systemd/system/multi-user.target.wants/* \
 
 VOLUME [ "/sys/fs/cgroup" ]
 
-COPY entrypoint.sh /
+COPY 20.04/entrypoint.sh /
 ENTRYPOINT [ "/entrypoint.sh" ]
 
 #
@@ -44,7 +44,7 @@ FROM stage-1 AS stage-2
 
 RUN apt-get install -y mariadb-server
 
-COPY init-mariadb.sh /usr/local/sbin/
+COPY 20.04/init-mariadb.sh /usr/local/sbin/
 
 RUN systemctl enable mariadb.service; \
     echo -e 'if [ -x /usr/local/sbin/init-mariadb.sh ]; then ' \

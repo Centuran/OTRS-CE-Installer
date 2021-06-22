@@ -4,7 +4,7 @@ ENV container docker
 
 RUN ln -fs /usr/share/zoneinfo/Europe/Warsaw /etc/localtime; \
     apt-get update; \
-    apt-get install -y systemd systemd-sysv libdbd-mysql-perl; \
+    apt-get install -y systemd systemd-sysv; \
     apt-get install -y less
 
 # Commands below are based on jrei/systemd-ubuntu
@@ -24,7 +24,8 @@ RUN rm -f /lib/systemd/system/multi-user.target.wants/* \
 
 VOLUME [ "/sys/fs/cgroup" ]
 
-COPY entrypoint.sh /
+# Using the same entrypoint.sh as with Ubuntu 20.04
+COPY 20.04/entrypoint.sh /
 ENTRYPOINT [ "/entrypoint.sh" ]
 
 #
@@ -44,7 +45,8 @@ FROM stage-1 AS stage-2
 
 RUN apt-get install -y mariadb-server
 
-COPY init-mariadb.sh /usr/local/sbin/
+# Using the same init-mariadb.sh as with Ubuntu 20.04
+COPY 20.04/init-mariadb.sh /usr/local/sbin/
 
 RUN systemctl enable mariadb.service; \
     echo -e 'if [ -x /usr/local/sbin/init-mariadb.sh ]; then ' \
