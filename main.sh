@@ -200,12 +200,12 @@ source "${SCRIPT_DIR}/12-cron-jobs.sh"
 echo
 
 #
-# Step 13: Rebuild system configuration
+# Step 13: Perform final system configuration
 #
 
-print_step 13 'Rebuild system configuration'
+print_step 13 'Perform final system configuration'
 
-source "${SCRIPT_DIR}/13-config-rebuild.sh"
+source "${SCRIPT_DIR}/13-final-config.sh"
 
 echo
 
