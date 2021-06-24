@@ -227,7 +227,7 @@ print_centered "${COLOR_SUCCESS_ACCENTED}Installation completed!${COLOR_NONE}" \
 echo
 echo
 
-OTRS_CE_URL="http://$(hostname -i)/otrs/index.pl"
+OTRS_CE_URL="http://$(get_ip_address)/otrs/index.pl"
 
 print_centered "You can now log in to the installed system at:" 80
 echo
