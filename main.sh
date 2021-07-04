@@ -20,6 +20,7 @@ source "${SCRIPT_DIR}/utils/input.sh"
 source "${SCRIPT_DIR}/utils/misc.sh"
 source "${SCRIPT_DIR}/utils/output.sh"
 source "${SCRIPT_DIR}/utils/styles.sh"
+source "${SCRIPT_DIR}/utils/system.sh"
 
 TMP_DIR=$(mktemp -d)
 
